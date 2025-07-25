@@ -36,7 +36,6 @@ import (
 	utils "www.velocidex.com/golang/velociraptor/api/utils"
 	config_proto "www.velocidex.com/golang/velociraptor/config/proto"
 	"www.velocidex.com/golang/velociraptor/gui/velociraptor"
-	gui_assets "www.velocidex.com/golang/velociraptor/gui/velociraptor"
 	"www.velocidex.com/golang/velociraptor/services"
 	vutils "www.velocidex.com/golang/velociraptor/utils"
 )
@@ -48,7 +47,7 @@ func install_static_assets(
 	dir := utils.Join(base, "/app/")
 	mux.Handle(dir, ipFilter(config_obj, api_utils.StripPrefix(
 		dir, fixCSSURLs(config_obj,
-			gzipped.FileServer(NewCachedFilesystem(ctx, gui_assets.NewHTTPFS()))))))
+			gzipped.FileServer(NewCachedFilesystem(ctx, velociraptor.HTTP))))))
 
 	mux.Handle("/favicon.png",
 		http.RedirectHandler(utils.Join(base, "/favicon.ico"),
@@ -57,7 +56,7 @@ func install_static_assets(
 
 func GetTemplateHandler(
 	config_obj *config_proto.Config, template_name string) (http.Handler, error) {
-	data, err := gui_assets.ReadFile(template_name)
+	data, err := velociraptor.ReadFile(template_name)
 	if err != nil {
 		// It is possible that the binary was not built with the GUI
 		// app. This is not a fatal error but it is not very useful :-).
