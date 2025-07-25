@@ -18,6 +18,7 @@ bin/rsrc.syso
 
 artifacts/assets/ab0x.go
 gui/assets/ab0x.go
+gui/velociraptor/package-lock.json
 config/ab0x.go
 .eslintcache
 **/.DS_Store

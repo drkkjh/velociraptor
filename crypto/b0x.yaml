@@ -10,3 +10,4 @@ compression:
 custom:
   - files:
       - crypto/ca-certificates.crt
+    name: FileCryptoCaCertificatesCrt
